@@ -7,6 +7,7 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.openqa.selenium.JavascriptExecutor;
 
 import java.time.Duration;
 import java.util.List;
@@ -16,6 +17,8 @@ public class DemoQAAutomation {
         WebDriver driver = new ChromeDriver();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(4));
         Actions actions = new Actions(driver);
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        JavascriptExecutor js = (JavascriptExecutor) driver;
         try{
             driver.get("https://demoqa.com/");
             driver.manage().window().maximize();
@@ -25,15 +28,18 @@ public class DemoQAAutomation {
             driver.findElement(By.xpath("//label[@for=\"tree-node-home\"]")).click();
             List<WebElement> child = driver.findElements(By.xpath("//li[@class='rct-node rct-node-leaf']//label"));
             for (WebElement e : child) {
+                js.executeScript("arguments[0].scrollIntoView(true);", e);
+                Thread.sleep(500);
                 e.click();
-                System.out.println(driver.findElement(By.xpath("//span[@class='text-success']")).getText());
-                Thread.sleep(2000);
+                System.out.println(e.getText());
+
             }
 
-            System.out.println(driver.findElement(By.id("result")).getText());
 
-            driver.findElement((By.xpath("//span[text()=\"Buttons\"]"))).click();
 
+
+
+            driver.get("https://demoqa.com/buttons");
             WebElement doubleClick= driver.findElement(By.xpath("//button[text()=\"Double Click Me\"]"));
             actions.doubleClick(doubleClick).perform();
             System.out.println(driver.findElement(By.id("doubleClickMessage")).getText());
@@ -53,6 +59,7 @@ public class DemoQAAutomation {
             driver.findElement(By.xpath("//input[@id='salary']")).sendKeys("50000");
             driver.findElement(By.xpath("//input[@id='department']")).sendKeys("automation");
             driver.findElement(By.xpath("//button[text()=\"Submit\"]")).click();
+            Thread.sleep(8000);
 
 //            driver.findElement(By.xpath("//div[text()=\"Elements\"]")).click();
 //            Thread.sleep(4000);
@@ -70,8 +77,10 @@ public class DemoQAAutomation {
 //            Thread.sleep(4000);
             driver.findElement(By.xpath("//span[@title=\"Edit\"]")).click();
             WebElement department = driver.findElement(By.xpath("//input[@id=\"department\"]"));
+            Thread.sleep(2000);
             department.clear();
             department.sendKeys("Automation");
+            Thread.sleep(2000);
             driver.findElement(By.xpath("//button[text()=\"Submit\"]")).click();
             driver.findElement(By.xpath("//span[@title=\"Delete\"]")).click();
 
@@ -82,6 +91,7 @@ public class DemoQAAutomation {
 
         }
         catch(Exception e){
+            System.out.println(e.getMessage());
             driver.quit();
         }
         finally{
