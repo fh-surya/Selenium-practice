@@ -45,20 +45,31 @@ public class DemoQAAutomation {
             Thread.sleep(4000);
             driver.findElement(By.xpath("//button[text()=\"Submit\"]")).click();
             Thread.sleep(4000);
-            driver.findElement(By.xpath("//div[text()=\"Elements\"]")).click();
+//            driver.findElement(By.xpath("//div[text()=\"Elements\"]")).click();
+//            Thread.sleep(4000);
+//            driver.findElement(By.xpath("//div[text()=\"Widgets\"]")).click();
+//            Thread.sleep(4000);
+//            driver.findElement(By.xpath("//span[text()=\"Slider\"]")).click();
+//            Thread.sleep(4000);
+//            WebElement start = driver.findElement(By.xpath("//input[@value=\"25\"]"));
+//            actions.clickAndHold(start)
+//                    .moveByOffset(40,0)
+//                    .release()
+//                    .perform();
+//            WebElement start1 = driver.findElement(By.xpath("//input[@value=\"55\"]"));
+//            actions.clickAndHold(start1).moveByOffset(3, 1).release().perform();
+//            Thread.sleep(4000);
+            driver.findElement(By.xpath("//span[@title=\"Edit\"]")).click();
             Thread.sleep(4000);
-            driver.findElement(By.xpath("//div[text()=\"Widgets\"]")).click();
+
+
+            WebElement department = driver.findElement(By.xpath("//input[@id=\"department\"]"));
+            department.clear();
+            department.sendKeys("Automation");
+
+            driver.findElement(By.xpath("//button[text()=\"Submit\"]")).click();
             Thread.sleep(4000);
-            driver.findElement(By.xpath("//span[text()=\"Slider\"]")).click();
-            Thread.sleep(4000);
-            WebElement start = driver.findElement(By.xpath("//input[@value=\"25\"]"));
-            actions.clickAndHold(start)
-                    .moveByOffset(40,0)
-                    .release()
-                    .perform();
-            WebElement start1 = driver.findElement(By.xpath("//input[@value=\"55\"]"));
-            actions.clickAndHold(start1).moveByOffset(3, 1).release().perform();
-            Thread.sleep(4000);
+
 
 
 
